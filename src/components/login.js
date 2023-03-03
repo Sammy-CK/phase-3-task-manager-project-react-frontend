@@ -8,7 +8,7 @@ function LogIn({loginDetails, setLoginDetails, userID, setUserID}) {
         <div>
             <form onSubmit={(e) => {
                 e.preventDefault()
-                console.log(loginDetails)
+                // console.log(loginDetails)
 
             fetch("http://localhost:9292/login", {
                 method: "PATCH",
@@ -21,7 +21,7 @@ function LogIn({loginDetails, setLoginDetails, userID, setUserID}) {
                 })
             }).then(resp => resp.json())
             .then(data =>{
-                console.log(data)
+                // console.log(data)
                 if(data.isRegistered === 'true'){
                     takeToTask('/tasks')
                     setUserID(data.userId)

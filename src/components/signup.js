@@ -7,7 +7,7 @@ function SignUp({signupDetails, setSignupDetails}) {
         <div>
         <form id="logInForm" onSubmit={(e) => {
             e.preventDefault()
-            console.log(signupDetails)
+            // console.log(signupDetails)
             if (document.getElementById("Initial").value === document.getElementById("secondInitial").value) {
                 
                 fetch("http://localhost:9292/signup", {
@@ -22,7 +22,7 @@ function SignUp({signupDetails, setSignupDetails}) {
                     })
                 }).then(resp => resp.json())
                 .then(data => {
-                    console.log(data)
+                    // console.log(data)
                     alert("new Negro")
                     travelHome("/login");
                 })

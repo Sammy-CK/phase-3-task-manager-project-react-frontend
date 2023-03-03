@@ -1,10 +1,10 @@
 import React from "react";
-import {useParams, NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 
 function SingleTask({currTask}) {
-    let currID = useParams().id
-    console.log(currID)
+    // let currID = useParams().id
+    // console.log(currID)
     return (
     <div>
         <h2>{currTask.name}</h2>

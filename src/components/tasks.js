@@ -1,11 +1,10 @@
 import {React} from "react";
 import TaskUl from "./taskul";
 
-function Tasks({userID, task, setTask, allTasks, setAllTasks, currTask, setcurrTask}){
-    // console.log(userID)
+function Tasks({userID, task, setTask, allTasks, setAllTasks, currTask, setcurrTask, todayTasks, setTodayTasks}){
+    // console.log(todayTasks)
 
-
-
+    // let todTasks = [...allTasks]
     let tasksShown = allTasks.map((taskd) => {
 
    return <TaskUl key={taskd.id} taskd={taskd} currTask={currTask} setcurrTask={setcurrTask}/>
@@ -52,9 +51,10 @@ function Tasks({userID, task, setTask, allTasks, setAllTasks, currTask, setcurrT
                     })
                 }).then(resp => resp.json())
                   .then(data => {
-                    console.log(data)
+                    // console.log(data)
 
                         setAllTasks(data)
+                        setTodayTasks(false)
                     
                   })
             
@@ -84,8 +84,51 @@ function Tasks({userID, task, setTask, allTasks, setAllTasks, currTask, setcurrT
         <br />
 <input type="submit" value="CREATE"/>
             </form>
+<h2>click to see: 
+<button onClick={() => {
+    if(todayTasks === false){
+        setTodayTasks(true)
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0');
+        let yyyy = today.getFullYear()
+        let x = allTasks.filter((tTask) => +(tTask.due.slice(0, 4)) === yyyy && tTask.due.slice(5, 7) === mm &&  tTask.due.slice(8, 10) === dd )
+            //   if(){
+            //   console.log(tTask, tTask.due.slice(0, 4), tTask.due.slice(5, 7), tTask.due.slice(8, 10))
+              
+            //    }else {
+
+            //   }
+
+            
+            setAllTasks(x)
+    
+    console.log("Heres the staple", yyyy,mm, dd)
+        }else{
+            setTodayTasks(false)
+            fetch("http://localhost:9292/tasks", {
+                method: "PATCH",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_id: userID
+                })
+            }).then(resp => resp.json())
+              .then(data => {
+                // console.log(data)
+
+                    setAllTasks(data)
+                    // setTodayTasks(data)
+                
+              })
+
+        }
 
 
+
+}}>{todayTasks === false ? "TODAY TASKS" : "ALL TASKS"}</button></h2>
+    <h3>{`Tasks for ${todayTasks === false ? "EVERYDAY" : "TODAY"}`}</h3>
             <ul>
                 {tasksShown}
             </ul>

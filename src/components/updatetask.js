@@ -1,9 +1,9 @@
 import React from "react";
-import {useParams, NavLink, useNavigate} from 'react-router-dom'
+import {NavLink, useNavigate} from 'react-router-dom'
 
 
-function UpdateTask({currTask, userID, setAllTasks, updatedStatus, setUpdatedStatus}) {
-    let currID = useParams().id
+function UpdateTask({currTask, userID, setAllTasks, updatedStatus, setUpdatedStatus, setTodayTasks}) {
+    // let currID = useParams().id
 
     let takeToTask = useNavigate()
 
@@ -28,7 +28,7 @@ function UpdateTask({currTask, userID, setAllTasks, updatedStatus, setUpdatedSta
 
                 }).then(resp => resp.json())
                 .then(data => {
-                    console.log(data)
+                    // console.log(data)
                     setUpdatedStatus({status: ""})
                 })
 
@@ -37,7 +37,7 @@ function UpdateTask({currTask, userID, setAllTasks, updatedStatus, setUpdatedSta
 
 
                 fetch("http://localhost:9292/tasks", {
-                    method: "PATCH",
+                    method: "PATCH",    
                     headers: {
                         "content-type": "application/json"
                     },
@@ -46,10 +46,10 @@ function UpdateTask({currTask, userID, setAllTasks, updatedStatus, setUpdatedSta
                     })
                 }).then(resp => resp.json())
                   .then(data => {
-                    console.log(data)
+                    // console.log(data)
 
                         setAllTasks(data)
-
+                        setTodayTasks(false)
                     takeToTask('/tasks')
                     alert("updated successfully")
                     
@@ -80,9 +80,9 @@ function UpdateTask({currTask, userID, setAllTasks, updatedStatus, setUpdatedSta
         <br />
 
         <button onClick={() => {
-            console.log(updatedStatus.status)
+            // console.log(updatedStatus.status)
             setUpdatedStatus({status: ""})
-            console.log(updatedStatus.status)
+            // console.log(updatedStatus.status)
             }}> <NavLink to={`/tasks`}>CANCEL</NavLink> </button>
         <br />
         <br />

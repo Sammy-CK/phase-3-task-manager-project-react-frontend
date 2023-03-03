@@ -45,10 +45,10 @@ function App() {
         })
     }).then(resp => resp.json())
       .then(data => {
-        console.log(data)
+        // console.log(data)
 
             setAllTasks(data)
-        
+            // setTodayTasks(data)
       })
 
 
@@ -62,6 +62,7 @@ function App() {
     status: ""
   })
 
+  let [todayTasks, setTodayTasks] = useState(false)
 
 
   return (
@@ -71,9 +72,9 @@ function App() {
           <Route path="/login" element={<LogIn loginDetails={loginDetails} setLoginDetails={setLoginDetails}  userID={userID} setUserID={setUserID}/>} />
           <Route path="/signup" element={<SignUp signupDetails={signupDetails} setSignupDetails={setSignupDetails} />} />
           <Route path="/" element={<HomePage />}/>
-          <Route path="/tasks" element={<Tasks userID={userID} task={task} setTask={setTask} allTasks={allTasks} setAllTasks={setAllTasks} currTask={currTask} setcurrTask={setcurrTask}/>}/>
+          <Route path="/tasks" element={<Tasks userID={userID} task={task} setTask={setTask} allTasks={allTasks} setAllTasks={setAllTasks} currTask={currTask} setcurrTask={setcurrTask} todayTasks={todayTasks} setTodayTasks={setTodayTasks}/>}/>
           <Route path="/tasks/:id" element={<SingleTask currTask={currTask}/>}/>
-          <Route path="/tasks/update/:id" element={<UpdateTask currTask={currTask} userID={userID} setAllTasks={setAllTasks} updatedStatus={updatedStatus} setUpdatedStatus={setUpdatedStatus}/>}/>
+          <Route path="/tasks/update/:id" element={<UpdateTask currTask={currTask} userID={userID} setAllTasks={setAllTasks} updatedStatus={updatedStatus} setUpdatedStatus={setUpdatedStatus} setTodayTasks={setTodayTasks}/>}/>
 
 
         </Routes>
