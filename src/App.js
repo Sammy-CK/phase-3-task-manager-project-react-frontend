@@ -6,6 +6,7 @@ import SignUp from "./components/signup";
 import HomePage from './components/homepage';
 import Tasks from './components/tasks';
 import SingleTask from './components/singletask'
+import UpdateTask from './components/updatetask'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -57,6 +58,10 @@ function App() {
 
   let [currTask, setcurrTask] = useState()
 
+  let [updatedStatus, setUpdatedStatus] = useState({
+    status: ""
+  })
+
 
 
   return (
@@ -68,6 +73,8 @@ function App() {
           <Route path="/" element={<HomePage />}/>
           <Route path="/tasks" element={<Tasks userID={userID} task={task} setTask={setTask} allTasks={allTasks} setAllTasks={setAllTasks} currTask={currTask} setcurrTask={setcurrTask}/>}/>
           <Route path="/tasks/:id" element={<SingleTask currTask={currTask}/>}/>
+          <Route path="/tasks/update/:id" element={<UpdateTask currTask={currTask} userID={userID} setAllTasks={setAllTasks} updatedStatus={updatedStatus} setUpdatedStatus={setUpdatedStatus}/>}/>
+
 
         </Routes>
       </BrowserRouter>
