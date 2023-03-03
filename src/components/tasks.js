@@ -1,14 +1,14 @@
 import {React} from "react";
 import TaskUl from "./taskul";
 
-function Tasks({userID, task, setTask, allTasks, setAllTasks}){
+function Tasks({userID, task, setTask, allTasks, setAllTasks, currTask, setcurrTask}){
     // console.log(userID)
 
 
 
     let tasksShown = allTasks.map((taskd) => {
 
-   return <TaskUl key={taskd.id} taskd={taskd}/>
+   return <TaskUl key={taskd.id} taskd={taskd} currTask={currTask} setcurrTask={setcurrTask}/>
           })
 
 
