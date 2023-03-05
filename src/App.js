@@ -64,6 +64,11 @@ function App() {
 
   let [todayTasks, setTodayTasks] = useState(false)
 
+  let [filterValues, setFilterValues] = useState({
+    status: "ALL",
+    due: ""
+  })
+
 
   return (
     <div className="App">
@@ -72,7 +77,7 @@ function App() {
           <Route path="/login" element={<LogIn loginDetails={loginDetails} setLoginDetails={setLoginDetails}  userID={userID} setUserID={setUserID}/>} />
           <Route path="/signup" element={<SignUp signupDetails={signupDetails} setSignupDetails={setSignupDetails} />} />
           <Route path="/" element={<HomePage />}/>
-          <Route path="/tasks" element={<Tasks userID={userID} task={task} setTask={setTask} allTasks={allTasks} setAllTasks={setAllTasks} currTask={currTask} setcurrTask={setcurrTask} todayTasks={todayTasks} setTodayTasks={setTodayTasks}/>}/>
+          <Route path="/tasks" element={<Tasks filterValues={filterValues} setFilterValues={setFilterValues} userID={userID} task={task} setTask={setTask} allTasks={allTasks} setAllTasks={setAllTasks} currTask={currTask} setcurrTask={setcurrTask} todayTasks={todayTasks} setTodayTasks={setTodayTasks}/>}/>
           <Route path="/tasks/:id" element={<SingleTask currTask={currTask}/>}/>
           <Route path="/tasks/update/:id" element={<UpdateTask currTask={currTask} userID={userID} setAllTasks={setAllTasks} updatedStatus={updatedStatus} setUpdatedStatus={setUpdatedStatus} setTodayTasks={setTodayTasks}/>}/>
 

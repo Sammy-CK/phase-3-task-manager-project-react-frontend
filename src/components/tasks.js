@@ -1,7 +1,7 @@
 import {React} from "react";
 import TaskUl from "./taskul";
 
-function Tasks({userID, task, setTask, allTasks, setAllTasks, currTask, setcurrTask, todayTasks, setTodayTasks}){
+function Tasks({filterValues, setFilterValues, userID, task, setTask, allTasks, setAllTasks, currTask, setcurrTask, todayTasks, setTodayTasks}){
     // console.log(todayTasks)
 
     // let todTasks = [...allTasks]
@@ -80,7 +80,7 @@ function Tasks({userID, task, setTask, allTasks, setAllTasks, currTask, setcurrT
         <br />
 
         <label htmlFor="taskDue">DUE DATE:</label>
-        <input type="datetime-local" id="taskDue" required onChange={(e) =>  setTask({...task, due: e.target.value})} value={task.due} />
+        <input type="date" id="taskDue" required onChange={(e) =>  setTask({...task, due: e.target.value})} value={task.due} />
         <br />
 <input type="submit" value="CREATE"/>
             </form>
@@ -93,6 +93,7 @@ function Tasks({userID, task, setTask, allTasks, setAllTasks, currTask, setcurrT
         let mm = String(today.getMonth() + 1).padStart(2, '0');
         let yyyy = today.getFullYear()
         let x = allTasks.filter((tTask) => +(tTask.due.slice(0, 4)) === yyyy && tTask.due.slice(5, 7) === mm &&  tTask.due.slice(8, 10) === dd )
+        setFilterValues({status: "ALL", due: `${yyyy}-${mm}-${dd}`})
             //   if(){
             //   console.log(tTask, tTask.due.slice(0, 4), tTask.due.slice(5, 7), tTask.due.slice(8, 10))
               
@@ -120,7 +121,8 @@ function Tasks({userID, task, setTask, allTasks, setAllTasks, currTask, setcurrT
 
                     setAllTasks(data)
                     // setTodayTasks(data)
-                
+                    setFilterValues({status: "ALL", due: `${""}-${""}-${""}`})
+
               })
 
         }
@@ -136,7 +138,7 @@ function Tasks({userID, task, setTask, allTasks, setAllTasks, currTask, setcurrT
         e.preventDefault()
         let searchDate = document.getElementById('dueFilterTask').value;
         let searchStatus = document.getElementById('statusFilterTask').value;
-        // console.log(searchDate, searchStatus)
+        console.log(searchDate, searchStatus)   
         fetch("http://localhost:9292/tasks", {
             method: "PATCH",
             headers: {
@@ -186,44 +188,14 @@ function Tasks({userID, task, setTask, allTasks, setAllTasks, currTask, setcurrT
 
     }}>
     <label htmlFor="statusFilterTask">Status:</label>
-    <select name="statusFilterTask" id="statusFilterTask" 
-    // onChange={() =>  {
-        // fetch("http://localhost:9292/tasks", {
-        //     method: "PATCH",
-        //     headers: {
-        //         "content-type": "application/json"
-        //     },
-        //     body: JSON.stringify({
-        //         user_id: userID
-        //     })
-        // }).then(resp => resp.json())
-        //   .then(data => {
-        //     let searchStatus = document.getElementById('statusFilterTask').value;
-        //     setAllTasks(data.filter(task => task.status === searchStatus))
-
-        //   })
-
-// setTimeout(() => {
-//     let searchStatus = document.getElementById('statusFilterTask').value;
-//     let finalx = allTasks.filter(task => task.status === searchStatus)
-//     console.log("finalx", finalx)
-//     console.log("all:", allTasks)
-
-//     setAllTasks(finalx)
-
-
-// }, 6000);
-
-    // }
-        // }
-        >
+    <select name="statusFilterTask" id="statusFilterTask" onChange={(e) => setFilterValues({...filterValues, status: e.target.value})} value={filterValues.status}>
     <option value="ALL">ALL</option>
     <option value="NOT STARTED">NOT STARTED</option>
     <option value="ONGOING">ONGOING</option>
     <option value="COMPLETED">COMPLETED</option>
     </select><br />
     <label htmlFor="dueFilterTask">Date:</label>
-    <input type="datetime-local" id="dueFilterTask" />
+    <input type="date" id="dueFilterTask" onChange={(e) => setFilterValues({...filterValues, due: e.target.value})}  value={filterValues.due} />
     <input type="submit" value="Filter" />
     </form>
 
