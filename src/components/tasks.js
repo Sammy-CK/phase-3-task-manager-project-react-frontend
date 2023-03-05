@@ -1,9 +1,9 @@
 import {React} from "react";
 import TaskUl from "./taskul";
-
-function Tasks({filterValues, setFilterValues, userID, task, setTask, allTasks, setAllTasks, currTask, setcurrTask, todayTasks, setTodayTasks}){
+import { useNavigate } from "react-router-dom";
+function Tasks({setUserID, filterValues, setFilterValues, userID, task, setTask, allTasks, setAllTasks, currTask, setcurrTask, todayTasks, setTodayTasks}){
     // console.log(todayTasks)
-
+    let takeLogIn = useNavigate()
     // let todTasks = [...allTasks]
     let tasksShown = allTasks.map((taskd) => {
 
@@ -12,9 +12,20 @@ function Tasks({filterValues, setFilterValues, userID, task, setTask, allTasks, 
 
 
     return (
-        <div>
+        <div id="takss" onClick={() => {
+            if (!userID){
+                takeLogIn('/login')
+            }else{
+        
+            }
+        }}>
             <h1>Task Manager</h1>
             <p>Staying organized is our game</p>
+            <button onClick={() => {
+                setUserID(null)
+                takeLogIn('/login')
+            }
+                }>LOG OUT</button>
             <h1>NEW TASK</h1>
             <form onSubmit={(e) => {
                 e.preventDefault()

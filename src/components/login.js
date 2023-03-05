@@ -2,7 +2,7 @@ import React from "react";
 import {NavLink, useNavigate} from "react-router-dom";
 
 
-function LogIn({loginDetails, setLoginDetails, userID, setUserID}) {
+function LogIn({loginDetails, setLoginDetails, userID, setUserID, setAllTasks}) {
     let takeToTask = useNavigate()
     return (
         <div>
@@ -23,9 +23,34 @@ function LogIn({loginDetails, setLoginDetails, userID, setUserID}) {
             .then(data =>{
                 // console.log(data)
                 if(data.isRegistered === 'true'){
-                    takeToTask('/tasks')
-                    setUserID(data.userId)
-                    setLoginDetails({name: '', password: ''});
+
+                    
+                        fetch("http://localhost:9292/tasks", {
+                            method: "PATCH",
+                            headers: {
+                                "content-type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                user_id: data.userId
+                            })
+                        }).then(resp => resp.json())
+                          .then(dataz => {
+                            // console.log(data)
+                    
+                                setAllTasks(dataz)
+                                setUserID(data.userId)
+                                takeToTask('/tasks')
+                                setLoginDetails({name: '', password: ''});
+
+                                // setTodayTasks(data)
+                          })
+                    
+                    
+                    
+                    
+
+
+
                     // console.log(userID)
                 }else if(data.isRegistered === 'false'){
                     alert("No matching user found ensure you enter correct credentials")

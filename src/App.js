@@ -34,26 +34,26 @@ function App() {
 
   let [allTasks, setAllTasks] = useState([])
 
-  useEffect(() => {
-    fetch("http://localhost:9292/tasks", {
-        method: "PATCH",
-        headers: {
-            "content-type": "application/json"
-        },
-        body: JSON.stringify({
-            user_id: userID
-        })
-    }).then(resp => resp.json())
-      .then(data => {
-        // console.log(data)
+//   useEffect(() => {
+//     fetch("http://localhost:9292/tasks", {
+//         method: "PATCH",
+//         headers: {
+//             "content-type": "application/json"
+//         },
+//         body: JSON.stringify({
+//             user_id: userID
+//         })
+//     }).then(resp => resp.json())
+//       .then(data => {
+//         // console.log(data)
 
-            setAllTasks(data)
-            // setTodayTasks(data)
-      })
+//             setAllTasks(data)
+//             // setTodayTasks(data)
+//       })
 
 
 
-}, [userID])
+// }, [userID])
 
 
   let [currTask, setcurrTask] = useState()
@@ -74,10 +74,10 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<LogIn loginDetails={loginDetails} setLoginDetails={setLoginDetails}  userID={userID} setUserID={setUserID}/>} />
+          <Route path="/login" element={<LogIn loginDetails={loginDetails} setLoginDetails={setLoginDetails}  userID={userID} setUserID={setUserID} setAllTasks={setAllTasks}/>} />
           <Route path="/signup" element={<SignUp signupDetails={signupDetails} setSignupDetails={setSignupDetails} />} />
           <Route path="/" element={<HomePage />}/>
-          <Route path="/tasks" element={<Tasks filterValues={filterValues} setFilterValues={setFilterValues} userID={userID} task={task} setTask={setTask} allTasks={allTasks} setAllTasks={setAllTasks} currTask={currTask} setcurrTask={setcurrTask} todayTasks={todayTasks} setTodayTasks={setTodayTasks}/>}/>
+          <Route path="/tasks" element={<Tasks setUserID={setUserID} filterValues={filterValues} setFilterValues={setFilterValues} userID={userID} task={task} setTask={setTask} allTasks={allTasks} setAllTasks={setAllTasks} currTask={currTask} setcurrTask={setcurrTask} todayTasks={todayTasks} setTodayTasks={setTodayTasks}/>}/>
           <Route path="/tasks/:id" element={<SingleTask currTask={currTask}/>}/>
           <Route path="/tasks/update/:id" element={<UpdateTask setFilterValues={setFilterValues} currTask={currTask} userID={userID} setAllTasks={setAllTasks} updatedStatus={updatedStatus} setUpdatedStatus={setUpdatedStatus} setTodayTasks={setTodayTasks}/>}/>
 
