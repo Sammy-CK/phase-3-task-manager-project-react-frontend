@@ -79,7 +79,7 @@ function App() {
           <Route path="/" element={<HomePage />}/>
           <Route path="/tasks" element={<Tasks filterValues={filterValues} setFilterValues={setFilterValues} userID={userID} task={task} setTask={setTask} allTasks={allTasks} setAllTasks={setAllTasks} currTask={currTask} setcurrTask={setcurrTask} todayTasks={todayTasks} setTodayTasks={setTodayTasks}/>}/>
           <Route path="/tasks/:id" element={<SingleTask currTask={currTask}/>}/>
-          <Route path="/tasks/update/:id" element={<UpdateTask currTask={currTask} userID={userID} setAllTasks={setAllTasks} updatedStatus={updatedStatus} setUpdatedStatus={setUpdatedStatus} setTodayTasks={setTodayTasks}/>}/>
+          <Route path="/tasks/update/:id" element={<UpdateTask setFilterValues={setFilterValues} currTask={currTask} userID={userID} setAllTasks={setAllTasks} updatedStatus={updatedStatus} setUpdatedStatus={setUpdatedStatus} setTodayTasks={setTodayTasks}/>}/>
 
 
         </Routes>

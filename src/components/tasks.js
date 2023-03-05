@@ -7,7 +7,7 @@ function Tasks({filterValues, setFilterValues, userID, task, setTask, allTasks, 
     // let todTasks = [...allTasks]
     let tasksShown = allTasks.map((taskd) => {
 
-   return <TaskUl key={taskd.id} taskd={taskd} currTask={currTask} setcurrTask={setcurrTask}/>
+   return <TaskUl key={taskd.id} taskd={taskd} currTask={currTask} setcurrTask={setcurrTask} allTasks={allTasks} setAllTasks={setAllTasks}/>
           })
 
 

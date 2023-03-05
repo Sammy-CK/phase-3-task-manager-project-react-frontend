@@ -2,7 +2,7 @@ import React from "react";
 import {NavLink, useNavigate} from 'react-router-dom'
 
 
-function UpdateTask({currTask, userID, setAllTasks, updatedStatus, setUpdatedStatus, setTodayTasks}) {
+function UpdateTask({setFilterValues, currTask, userID, setAllTasks, updatedStatus, setUpdatedStatus, setTodayTasks}) {
     // let currID = useParams().id
 
     let takeToTask = useNavigate()
@@ -52,6 +52,8 @@ function UpdateTask({currTask, userID, setAllTasks, updatedStatus, setUpdatedSta
                         setTodayTasks(false)
                     takeToTask('/tasks')
                     alert("updated successfully")
+                    setFilterValues({status: "ALL", due: `${""}-${""}-${""}`})
+
                     
                   })
             
