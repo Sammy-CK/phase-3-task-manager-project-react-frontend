@@ -129,6 +129,104 @@ function Tasks({userID, task, setTask, allTasks, setAllTasks, currTask, setcurrT
 
 }}>{todayTasks === false ? "TODAY TASKS" : "ALL TASKS"}</button></h2>
     <h3>{`Tasks for ${todayTasks === false ? "EVERYDAY" : "TODAY"}`}</h3>
+
+    <p>Filters</p>
+    
+    <form onSubmit={(e) => {
+        e.preventDefault()
+        let searchDate = document.getElementById('dueFilterTask').value;
+        let searchStatus = document.getElementById('statusFilterTask').value;
+        // console.log(searchDate, searchStatus)
+        fetch("http://localhost:9292/tasks", {
+            method: "PATCH",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                user_id: userID
+            })
+        }).then(resp => resp.json())
+          .then(data => {
+                            console.log(data)
+            let x
+            if(searchStatus !== "ALL"){
+              x = data.filter(task => task.status === searchStatus)
+           }else{
+              x = data
+           }
+
+
+       if(searchDate) {
+        // let today = searchDate
+        // let dd = String(today.getDate()).padStart(2, '0');
+        // let mm = String(today.getMonth() + 1).padStart(2, '0');
+        // let yyyy = today.getFullYear()
+
+
+        let finalx = x.filter((tTask) => (tTask.due.slice(0, 4)) === searchDate.slice(0, 4) && tTask.due.slice(5, 7) === searchDate.slice(5, 7) &&  tTask.due.slice(8, 10) === searchDate.slice(8, 10) )
+         console.log(typeof(searchDate))
+        setAllTasks(finalx)
+        // console.log(searchDate, searchStatus)
+
+       }else{
+        setAllTasks(x)
+
+       } 
+        // let finalx = allTasks.filter(task => task.status === searchStatus)
+        // console.log("finalx", finalx)
+        // console.log("all:", allTasks)
+
+        // console.log(searchDate, searchStatus)
+
+
+
+    })
+
+
+
+    }}>
+    <label htmlFor="statusFilterTask">Status:</label>
+    <select name="statusFilterTask" id="statusFilterTask" 
+    // onChange={() =>  {
+        // fetch("http://localhost:9292/tasks", {
+        //     method: "PATCH",
+        //     headers: {
+        //         "content-type": "application/json"
+        //     },
+        //     body: JSON.stringify({
+        //         user_id: userID
+        //     })
+        // }).then(resp => resp.json())
+        //   .then(data => {
+        //     let searchStatus = document.getElementById('statusFilterTask').value;
+        //     setAllTasks(data.filter(task => task.status === searchStatus))
+
+        //   })
+
+// setTimeout(() => {
+//     let searchStatus = document.getElementById('statusFilterTask').value;
+//     let finalx = allTasks.filter(task => task.status === searchStatus)
+//     console.log("finalx", finalx)
+//     console.log("all:", allTasks)
+
+//     setAllTasks(finalx)
+
+
+// }, 6000);
+
+    // }
+        // }
+        >
+    <option value="ALL">ALL</option>
+    <option value="NOT STARTED">NOT STARTED</option>
+    <option value="ONGOING">ONGOING</option>
+    <option value="COMPLETED">COMPLETED</option>
+    </select><br />
+    <label htmlFor="dueFilterTask">Date:</label>
+    <input type="datetime-local" id="dueFilterTask" />
+    <input type="submit" value="Filter" />
+    </form>
+
             <ul>
                 {tasksShown}
             </ul>
