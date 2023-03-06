@@ -76,7 +76,7 @@ function Tasks({
         onSubmit={(e) => {
           e.preventDefault();
 
-          fetch("https://sammy-sinatra-tasks.onrender.com/create", {
+          fetch("https://sammy-sinatra-tasks.onrender.com/tasks/create", {
             method: "POST",
             headers: {
               "content-type": "application/json",
