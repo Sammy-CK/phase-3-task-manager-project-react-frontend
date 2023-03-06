@@ -13,6 +13,13 @@ function UpdateTask({
 }) {
   let takeToTask = useNavigate();
 
+  function showCurrDate (currentTask){
+    let yy = currentTask.slice(0, 4)
+    let m = currentTask.slice(5, 7)
+    let d = currentTask.slice(8, 10)
+    return (`${yy}-${m}-${d}`)
+  }
+
   return (
     <div className="formDivUpdate">
             <h1
@@ -68,7 +75,7 @@ function UpdateTask({
               setAllTasks(data);
               setTodayTasks(false);
               takeToTask("/tasks");
-              alert("updated successfully");
+              // alert("updated successfully");
               setFilterValues({ status: "ALL", due: `${""}-${""}-${""}` });
             });
         }}
@@ -118,7 +125,7 @@ function UpdateTask({
         <br />
         <br />
         <p style={{clear: "both"}}><label htmlFor="taskDue"  >DUE DATE:</label>
-        <b style={{paddingLeft: "40px"}}>{currTask.due}</b></p>
+        <b style={{paddingLeft: "40px"}}>{showCurrDate(currTask.due)}</b></p>
         <br />
         <button
         className="cancelUpdateTask"
