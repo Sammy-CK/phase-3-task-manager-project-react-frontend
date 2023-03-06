@@ -27,7 +27,7 @@ function SignUp({ signupDetails, setSignupDetails }) {
             document.getElementById("Initial").value ===
             document.getElementById("secondInitial").value
           ) {
-            fetch("http://localhost:9292/signup", {
+            fetch("https://sammy-sinatra-tasks.onrender.com/signup", {
               method: "POST",
               headers: {
                 "content-type": "application/json",

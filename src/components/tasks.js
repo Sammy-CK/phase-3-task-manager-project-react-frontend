@@ -76,7 +76,7 @@ function Tasks({
         onSubmit={(e) => {
           e.preventDefault();
 
-          fetch("http://localhost:9292/tasks/create", {
+          fetch("https://sammy-sinatra-tasks.onrender.com/create", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -95,7 +95,7 @@ function Tasks({
               setTask({name: '', description: '', due: '', status: ''})
             });
 
-          fetch("http://localhost:9292/tasks", {
+          fetch("https://sammy-sinatra-tasks.onrender.com/tasks", {
             method: "PATCH",
             headers: {
               "content-type": "application/json",
@@ -189,7 +189,7 @@ function Tasks({
               // console.log("Heres the staple", yyyy,mm, dd)
             } else {
               setTodayTasks(false);
-              fetch("http://localhost:9292/tasks", {
+              fetch("https://sammy-sinatra-tasks.onrender.com/tasks", {
                 method: "PATCH",
                 headers: {
                   "content-type": "application/json",
@@ -221,7 +221,7 @@ function Tasks({
           let searchDate = document.getElementById("dueFilterTask").value;
           let searchStatus = document.getElementById("statusFilterTask").value;
           // console.log(searchDate, searchStatus)
-          fetch("http://localhost:9292/tasks", {
+          fetch("https://sammy-sinatra-tasks.onrender.com/tasks", {
             method: "PATCH",
             headers: {
               "content-type": "application/json",

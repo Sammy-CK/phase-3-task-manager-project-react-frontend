@@ -43,7 +43,7 @@ function UpdateTask({
           if (updatedStatus.status === "") {
             setUpdatedStatus({ status: "" });
           } else {
-            fetch(`http://localhost:9292/tasks/update/${currTask.id}`, {
+            fetch(`https://sammy-sinatra-tasks.onrender.com/tasks/update/${currTask.id}`, {
               method: "PATCH",
               headers: {
                 "content-type": "application/json",
@@ -59,7 +59,7 @@ function UpdateTask({
               });
           }
 
-          fetch("http://localhost:9292/tasks", {
+          fetch("https://sammy-sinatra-tasks.onrender.com/tasks", {
             method: "PATCH",
             headers: {
               "content-type": "application/json",
