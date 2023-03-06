@@ -1,21 +1,23 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import './style/tasks.css'
 
 function TaskUl({ taskd, setcurrTask, allTasks, setAllTasks }) {
   return (
-    <li>
-      <h2>{taskd.name}</h2>
-      <p>{taskd.status}</p>
-      <p>{taskd.due}</p>
-      <button onClick={() => setcurrTask(taskd)}>
+    <li className="taskCardLi">
+      <h2 className="restInLi">{taskd.name}</h2>
+      <p style={{float: "left", paddingLeft: "150px"}}><b>STATUS: </b>{taskd.status}</p>
+      <p><b>DUE: </b>{taskd.due}</p>
+      <button className="liBtn1" onClick={() => setcurrTask(taskd)}>
         {" "}
-        <NavLink to={`/tasks/${taskd.id}`}>More info</NavLink>
+        <NavLink to={`/tasks/${taskd.id}`} style={{textDecoration: "none", color: "black"}}>More info</NavLink>
       </button>
-      <button onClick={() => setcurrTask(taskd)}>
+      <button className="liBtn2" onClick={() => setcurrTask(taskd)}>
         {" "}
-        <NavLink to={`/tasks/update/${taskd.id}`}>Edit</NavLink>
+        <NavLink to={`/tasks/update/${taskd.id}` } style={{textDecoration: "none", color: "black"}}>Edit</NavLink>
       </button>
       <button
+      className="liBtn3"
         onClick={() => {
           fetch(`http://localhost:9292/tasks/${taskd.id}`, {
             method: "DELETE",

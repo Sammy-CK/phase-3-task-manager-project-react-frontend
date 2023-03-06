@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import './style/update.css'
 
 function UpdateTask({
   setFilterValues,
@@ -13,8 +14,22 @@ function UpdateTask({
   let takeToTask = useNavigate();
 
   return (
-    <div>
+    <div className="formDivUpdate">
+            <h1
+        style={{
+          textAlign: "left",
+          padding: "0px 10px 10px 10px",
+          fontSize: "4vw",
+          fontFamily: "fantasy",
+          width: "40%",
+        }}
+      >
+        TASK MANAGER
+      </h1>
+
+      <div className="loginDivUpdate">
       <form
+        className="logInFormUpdate"
         onSubmit={(e) => {
           e.preventDefault();
 
@@ -58,7 +73,7 @@ function UpdateTask({
             });
         }}
       >
-        <label htmlFor="taskName">TASK NAME:</label>
+        <label htmlFor="taskName" style={{paddingRight: "20px"}}>TASK NAME:</label>
         <input type="text" disabled id="taskName" value={currTask.name} />
         <br />
         <label htmlFor="taskDescription">DESCRIPTION:</label>
@@ -71,45 +86,52 @@ function UpdateTask({
         <br />
         <label htmlFor="taskStatus">STATUS:</label>
         <br />
+        <div className="choiceStatus">
         <input
           type="radio"
           name="statusChoice"
           onChange={(e) => setUpdatedStatus({ status: "NOT STARTED" })}
           value={updatedStatus.status}
         />
-        <p>NOT STARTED</p>
-        <br />
+        NOT STARTED
+        </div>
+        {/* <br /> */}
+        <div className="choiceStatus">
         <input
           type="radio"
           name="statusChoice"
           onChange={(e) => setUpdatedStatus({ status: "ONGOING" })}
           value={updatedStatus.status}
         />
-        <p>ONGOING</p> <br />
+        ONGOING
+        </div> 
+        {/* <br /> */}
+        <div className="choiceStatus">
         <input
           type="radio"
           name="statusChoice"
           onChange={(e) => setUpdatedStatus({ status: "COMPLETED" })}
           value={updatedStatus.status}
         />
-        <p>COMPLETED</p>
+        COMPLETED
+        </div>
         <br />
         <br />
-        <label htmlFor="taskDue">DUE DATE:</label>
-        <p>{currTask.due}</p>
+        <p style={{clear: "both"}}><label htmlFor="taskDue"  >DUE DATE:</label>
+        <b style={{paddingLeft: "40px"}}>{currTask.due}</b></p>
         <br />
         <button
+        className="cancelUpdateTask"
           onClick={() => {
             setUpdatedStatus({ status: "" });
           }}
         >
           {" "}
-          <NavLink to={`/tasks`}>CANCEL</NavLink>{" "}
+          <NavLink className="cancelNav" to={`/tasks`} >CANCEL</NavLink>{" "}
         </button>
-        <br />
-        <br />
         <input type="submit" value="UPDATE" />
       </form>
+      </div>
     </div>
   );
 }

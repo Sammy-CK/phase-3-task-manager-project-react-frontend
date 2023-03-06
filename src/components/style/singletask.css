@@ -1,0 +1,45 @@
+.formDivSingle {
+    position: absolute;
+    top: 0px;
+    background-image: url(../../../public/marvin-meyer-SYTO3xs06fU-unsplash\ \(1\).jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 100%;
+    min-height: 100%;
+}
+
+
+
+.loginDivSingle {
+
+    width: 100%;
+    min-height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+
+.logInFormSingle {
+    background-color: rgba(27, 27, 27, 0.7);
+    width: 70%;
+    height: 500px;
+    text-align: center;
+    padding-top: 30px;
+    border-radius: 12px;
+}
+
+.singleAttrTask{
+    /* style={{paddingRight: "140px"}} */
+    color: blue;
+}
+
+.singleAttr{
+    text-align: left;
+    padding: 30px 30px 30px 90px;
+
+
+}

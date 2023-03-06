@@ -1,13 +1,26 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import './style/signup.css'
 
 function SignUp({ signupDetails, setSignupDetails }) {
   let travelHome = useNavigate();
   return (
-    <div>
+    <div className="formDiv">
+            <h1
+        style={{
+          textAlign: "left",
+          padding: "0px 10px 10px 10px",
+          fontSize: "4vw",
+          fontFamily: "fantasy",
+          width: "40%",
+        }}
+      >
+        TASK MANAGER
+      </h1>
+      <div className="loginDiv">
       <form
-        id="logInForm"
-        onSubmit={(e) => {
+          className="logInForm"
+          onSubmit={(e) => {
           e.preventDefault();
           // console.log(signupDetails)
           if (
@@ -84,6 +97,7 @@ function SignUp({ signupDetails, setSignupDetails }) {
           Have an account? <NavLink to="/login">LOGIN</NavLink>
         </p>
       </form>
+      </div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import './style/login.css'
 
 function LogIn({
   loginDetails,
@@ -10,8 +11,23 @@ function LogIn({
 }) {
   let takeToTask = useNavigate();
   return (
-    <div>
+    <div className="formDiv">
+
+<h1
+        style={{
+          textAlign: "left",
+          padding: "0px 10px 10px 10px",
+          fontSize: "4vw",
+          fontFamily: "fantasy",
+          width: "40%",
+        }}
+      >
+        TASK MANAGER
+      </h1>
+
+      <div className="loginDiv">
       <form
+        className="logInForm"
         onSubmit={(e) => {
           e.preventDefault();
           // console.log(loginDetails)
@@ -82,11 +98,12 @@ function LogIn({
           value={loginDetails.password}
         />
         <br />
-        <input type="submit" value="LOGIN" />
+        <input type="submit" id="submitBtn" value="LOGIN" />
         <p>
           Dont have an account? <NavLink to="/signup">SIGNUP</NavLink>
         </p>
       </form>
+      </div>
     </div>
   );
 }

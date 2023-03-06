@@ -1,6 +1,7 @@
 import { React } from "react";
 import TaskUl from "./taskul";
 import { useNavigate } from "react-router-dom";
+import './style/tasks.css'
 function Tasks({
   setUserID,
   filterValues,
@@ -32,6 +33,7 @@ function Tasks({
 
   return (
     <div
+    className="taskDiv"
       id="takss"
       onClick={() => {
         if (!userID) {
@@ -39,9 +41,8 @@ function Tasks({
         }
       }}
     >
-      <h1>Task Manager</h1>
-      <p>Staying organized is our game</p>
-      <button
+            <button
+      className="homepageLinks"
         onClick={() => {
           setUserID(null);
           takeLogIn("/login");
@@ -49,8 +50,29 @@ function Tasks({
       >
         LOG OUT
       </button>
-      <h1>NEW TASK</h1>
+      <h1
+        style={{
+          textAlign: "left",
+          padding: "0px 10px 10px 10px",
+          fontSize: "4vw",
+          fontFamily: "fantasy",
+          width: "40%",
+        }}
+      >
+        TASK MANAGER
+      </h1>
+     <div  style={{ textAlign: "right", paddingRight: "30px", clear: "both" }}>
+        <p>
+          <b style={{ fontSize: "2vw" }}>
+          Staying organized is our game
+          </b>
+        </p>
+      </div>
+
+        <div className="formDivTasks">
+      <div className="loginDivTasks">
       <form
+      className="logInFormTasks"
         onSubmit={(e) => {
           e.preventDefault();
 
@@ -70,6 +92,7 @@ function Tasks({
             .then((resp) => resp.json())
             .then((data) => {
               console.log(data);
+              setTask({name: '', description: '', due: '', status: ''})
             });
 
           fetch("http://localhost:9292/tasks", {
@@ -91,8 +114,10 @@ function Tasks({
             });
         }}
       >
+              <h1 style={{textAlign: "center"}}>ADD TASK</h1>
         <label htmlFor="taskName">TASK NAME:</label>
         <input
+        style={{marginLeft: "50px", width: "40%"}}
           type="text"
           id="taskName"
           required
@@ -103,6 +128,7 @@ function Tasks({
 
         <label htmlFor="taskDescription">DESCRIPTION:</label>
         <input
+        style={{marginLeft: "29px", width: "40%"}}
           type="text"
           id="taskDescription"
           required
@@ -113,6 +139,7 @@ function Tasks({
 
         <label htmlFor="taskStatus">STATUS:</label>
         <select
+        style={{marginLeft: "110px"}}
           id="taskStatus"
           required
           onChange={(e) => setTask({ ...task, status: e.target.value })}
@@ -126,6 +153,7 @@ function Tasks({
 
         <label htmlFor="taskDue">DUE DATE:</label>
         <input
+        style={{marginLeft: "70px", width: "40%"}}
           type="date"
           id="taskDue"
           required
@@ -133,11 +161,14 @@ function Tasks({
           value={task.due}
         />
         <br />
-        <input type="submit" value="CREATE" />
+        <input type="submit" className="createBtn" value="CREATE" />
       </form>
-      <h2>
-        click to see:
+      </div>
+      </div>
+      <h2 className="clickh2">
+        CLICK TO SEE:  
         <button
+        className="todayBtn"
           onClick={() => {
             if (todayTasks === false) {
               setTodayTasks(true);
@@ -177,14 +208,14 @@ function Tasks({
             }
           }}
         >
-          {todayTasks === false ? "TODAY TASKS" : "ALL TASKS"}
-        </button>
+           {todayTasks === false ? "TODAY TASKS" : "ALL TASKS"}
+         </button>
       </h2>
-      <h3>{`Tasks for ${todayTasks === false ? "EVERYDAY" : "TODAY"}`}</h3>
+      <h3 style={{clear: "both"}}>{`Tasks for ${todayTasks === false ? "EVERYDAY" : "TODAY"}`}</h3>
 
-      <p>Filters</p>
 
       <form
+      className="filterForm"
         onSubmit={(e) => {
           e.preventDefault();
           let searchDate = document.getElementById("dueFilterTask").value;
@@ -224,8 +255,11 @@ function Tasks({
             });
         }}
       >
-        <label htmlFor="statusFilterTask">Status:</label>
+              <p style={{textAlign: "center", paddingBottom: "10px"}}>Filters</p>
+
+        <label htmlFor="statusFilterTask" style={{float: "left", marginLeft: "190px"}}>Status:</label>
         <select
+        style={{float: "left", marginRight: "10px"}}
           name="statusFilterTask"
           id="statusFilterTask"
           onChange={(e) =>
@@ -238,9 +272,10 @@ function Tasks({
           <option value="ONGOING">ONGOING</option>
           <option value="COMPLETED">COMPLETED</option>
         </select>
-        <br />
-        <label htmlFor="dueFilterTask">Date:</label>
+        {/* <br /> */}
+        <label htmlFor="dueFilterTask" style={{float: "left"}}>Date:</label>
         <input
+        style={{float: "left"}}
           type="date"
           id="dueFilterTask"
           onChange={(e) =>
@@ -248,10 +283,10 @@ function Tasks({
           }
           value={filterValues.due}
         />
-        <input type="submit" value="Filter" />
+        <input type="submit" style={{float: "left"}} className="filterBtn" value="Filter" />
       </form>
 
-      <ul>{tasksShown}</ul>
+      <ul className="taskCardUl">{tasksShown}</ul>
     </div>
   );
 }

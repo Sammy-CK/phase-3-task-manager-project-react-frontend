@@ -1,9 +1,17 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import './style/homepage.css';
 
 function HomePage() {
   return (
-    <div>
+    <div id="homepageDiv">
+
+      <NavLink className="homepageLinks" to="/login">
+        LOG IN
+      </NavLink>
+      <NavLink className="homepageLinks" to="/signup">
+        SIGN UP
+      </NavLink>
       <h1
         style={{
           textAlign: "left",
@@ -11,64 +19,58 @@ function HomePage() {
           fontSize: "4vw",
           fontFamily: "fantasy",
           width: "40%",
+          color: "black"
         }}
       >
         TASK MANAGER
       </h1>
-      <NavLink className="homepageLinks" to="/login">
-        LOG IN
-      </NavLink>
-      <NavLink className="homepageLinks" to="/signup">
-        SIGN UP
-      </NavLink>
-      <div style={{ textAlign: "right", paddingRight: "30px" }}>
+      <div className="insideHomePage">
+      <div  style={{ textAlign: "right", paddingRight: "30px" }}>
         <p>
           <b style={{ fontSize: "2vw" }}>
             Plan and coordinate your activities to ensure completion
           </b>
         </p>
       </div>
-      <div>
-        <p>
-          <b>Make your work more efficient: </b>
-          Inefficiencies often stem from disinterest. Task management greatly
-          improve productivity by making sure the right resources are utilized
-          at the right time.
+      <div className="missionDiv">
+        <p className="missionLi">
+          <b className="missionLi">Make your work more efficient: </b>
+          Task manager improves productivity by utilizing the right resources.
         </p>
-        <p>
-          <b>Bring focus to your tasks: </b>
-          Whether you work as an individual or for an organization,we help you
-          achieve your tasks goals.
+        <p className="missionLi">
+          <b className="missionLi">Bring focus to your tasks: </b>
+          Whether you work as an individual or an organization,we help you
+          achieve goals.
         </p>
-        <p>
-          <b>Organize your organization: </b>
-          Organizing your tasks in a way that helps streamline your workflow
-          goes a long way in becoming more efficient and reaching your target.
+        <p className="missionLi">
+          <b className="missionLi">Organize your organization: </b>
+          Helps streamline your workflow becoming more efficient, reaching your target.
         </p>
       </div>
-      <div>
+      <div className="testUl">
         <h3>Reviews</h3>
-        <p>
+        <p className="testLi">
           Once I used Task Manager their was no way I was going back.
           <br />
           <b>Philip, Developer Google</b>{" "}
         </p>
 
-        <p>
+        <p className="testLi">
           My tasks have never been more clear thank you for this amazing webapp
           <br />
           <b>Allan, Data Analyst Safaricom</b>{" "}
         </p>
 
-        <p>
+        <p className="testLi">
           Improved my productivity by a large margin 10/10
           <br />
           <b>Mwosa, DevOps Jumia</b>{" "}
         </p>
       </div>
       <small>
-        <b> &#169; 2022 TASK MANAGER</b>
+        <b className="patent"> &#169; 2022 TASK MANAGER</b>
       </small>{" "}
+      </div>
     </div>
   );
 }
